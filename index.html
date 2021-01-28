@@ -40,12 +40,12 @@
     const pendingTaskDiv = document.querySelector("#pendingTask");
     
     const pendingTasks = pendingTaskDiv.querySelector("UL");
-    const allPending = pendingTaskDiv.querySelectorAll("li");
+    let allPendingTasks = pendingTaskDiv.querySelectorAll("li");
     
     const doneTaskDiv = document.querySelector("#doneTask");
     
-    for (let allP of allPending) {
-        allP.addEventListener("click", function(e) {
+    for (let pendingTask of allPendingTasks) {
+        pendingTask.addEventListener("click", function(e) {
             console.log(this);
             doneTaskDiv.appendChild(this);
         })
