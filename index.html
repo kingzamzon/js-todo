@@ -4,9 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+        .green {
+            color: green;
+        }
+    </style>
 </head>
 <body>
     <section>
+        <h3>Add Task</h3>
         <form id="myForm" method="post">
             <input type="text" name="task"> <br />
             <button type="submit">Submit</button>
@@ -23,14 +29,27 @@
         </section>
     </section>
 
-    <section>
+    <section id="doneTask">
         <h3>Done Task</h3>
-        
+        <ul>
+
+        </ul>
     </section>
 </body>
 <script>
     const pendingTaskDiv = document.querySelector("#pendingTask");
+    
     const pendingTasks = pendingTaskDiv.querySelector("UL");
+    const allPending = pendingTaskDiv.querySelectorAll("li");
+    
+    const doneTaskDiv = document.querySelector("#doneTask");
+    
+    for (let allP of allPending) {
+        allP.addEventListener("click", function(e) {
+            console.log(this);
+            doneTaskDiv.appendChild(this);
+        })
+    }
 
     const myForm = document.querySelector("#myForm");
 
@@ -46,6 +65,8 @@
 
         pendingTasks.appendChild(newLi);
     }
+
+    
 
 </script>
 </html>
