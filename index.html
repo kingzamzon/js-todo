@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <section>
+        <form id="myForm" method="post">
+            <input type="text" name="task"> <br />
+            <button type="submit">Submit</button>
+        </form>
+    </section>
+
+    <section>
+        <h3>Pending Task</h3>
+        <section id="pendingTask">
+            <ul>
+                <li>Wash clothes</li>
+                <li>Weep the house</li>
+            </ul>
+        </section>
+    </section>
+
+    <section>
+        <h3>Done Task</h3>
+        
+    </section>
+</body>
+<script>
+    const pendingTaskDiv = document.querySelector("#pendingTask");
+    const pendingTasks = pendingTaskDiv.querySelector("UL");
+
+    const myForm = document.querySelector("#myForm");
+
+    myForm.addEventListener("submit", addToTask);
+    
+    function addToTask(e) {
+        e.preventDefault();
+        let textInput = document.querySelector("input").value;
+
+        const newLi = document.createElement("li");
+
+        newLi.innerText = textInput;
+
+        pendingTasks.appendChild(newLi);
+    }
+
+</script>
+</html>
