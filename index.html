@@ -9,6 +9,10 @@
             color: green;
         }
     </style>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css"
+    integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog=="
+    crossorigin="anonymous" />
 </head>
 <body>
     <section>
@@ -21,8 +25,8 @@
 
     <section>
         <h3>Pending Task</h3>
-        <section id="pendingTask">
-            <ul>
+        <section id="pendingTasks">
+            <ul id="thingsUndone">
                 <li>Wash clothes</li>
                 <li>Weep the house</li>
             </ul>
@@ -31,39 +35,59 @@
 
     <section id="doneTask">
         <h3>Done Task</h3>
-        <ul>
+        <ul id="thingsDone">
 
         </ul>
     </section>
 </body>
 <script>
-    const pendingTaskDiv = document.querySelector("#pendingTask");
+
+    // Selectors
+    const myForm = document.querySelector("#myForm");
+    const thingsUndone = document.querySelector("#thingsUndone");
+
+
+    // Event Listeners
+    myForm.addEventListener("submit", addTodo);
+    thingsUndone.addEventListener("click", deleteCheck);
+
     
-    const pendingTasks = pendingTaskDiv.querySelector("UL");
-    let allPendingTasks = pendingTaskDiv.querySelectorAll("li");
-    
-    const doneTaskDiv = document.querySelector("#doneTask");
-    
-    for (let pendingTask of allPendingTasks) {
-        pendingTask.addEventListener("click", function(e) {
-            console.log(this);
-            doneTaskDiv.appendChild(this);
-        })
+    // Functions
+    function addTodo(e) {
+        e.preventDefault();  //prevent from submitting 
+
+        // make a todo div inside ul
+        const todoDiv = document.createElement("div");
+        // todo.classList.add("todo");
+        
+        // create li element
+        const newLi = document.createElement("li");
+        let textInput = document.querySelector("input").value;
+        newLi.innerText = textInput;
+        todoDiv.appendChild(newLi);
+
+        // check btn
+        const doneButton = document.createElement("button");
+        doneButton.innerHTML = '<i class="fas fa-check"></i>';
+        // doneButton.classList.add('done-btn');
+        todoDiv.appendChild(doneButton);
+
+        // trash btn
+        const deleteBtn = document.createElement('button');
+        deleteBtn.innerHtml = '<i class="fas fa-trash"></i>';
+        // deleteBtn.classList.add('trash-btn');
+        todoDiv.appendChild(deleteBtn);
+        // append to list
+        thingsUndone.appendChild(todoDiv);
+        // clear input from user
+        textInput.value = "";
     }
 
-    const myForm = document.querySelector("#myForm");
-
-    myForm.addEventListener("submit", addToTask);
-    
-    function addToTask(e) {
-        e.preventDefault();
-        let textInput = document.querySelector("input").value;
-
-        const newLi = document.createElement("li");
-
-        newLi.innerText = textInput;
-
-        pendingTasks.appendChild(newLi);
+    function deleteCheck(e) {
+        const item = e.target;
+        console.log(item);
+        const todo = item.parentElement;
+        console.log(todo);
     }
 
     
