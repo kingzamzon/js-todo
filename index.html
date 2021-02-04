@@ -9,10 +9,10 @@
             color: green;
         }
     </style>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet">
+    <!-- <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css"
     integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog=="
-    crossorigin="anonymous" />
+    crossorigin="anonymous" /> -->
 </head>
 <body>
     <section>
@@ -25,15 +25,14 @@
 
     <section>
         <h3>Pending Task</h3>
-        <section id="pendingTasks">
-            <ul id="thingsUndone">
-                <li>Wash clothes</li>
-                <li>Weep the house</li>
+        <section >
+            <ul class="thingsUndone">
+                
             </ul>
         </section>
     </section>
 
-    <section id="doneTask">
+    <section>
         <h3>Done Task</h3>
         <ul id="thingsDone">
 
@@ -44,12 +43,13 @@
 
     // Selectors
     const myForm = document.querySelector("#myForm");
-    const thingsUndone = document.querySelector("#thingsUndone");
+    const thingsUndone = document.querySelector(".thingsUndone");
+    const thingsDone = document.querySelector("#thingsDone");
 
 
     // Event Listeners
     myForm.addEventListener("submit", addTodo);
-    thingsUndone.addEventListener("click", deleteCheck);
+    thingsUndone.addEventListener("click", btnClick);
 
     
     // Functions
@@ -58,36 +58,59 @@
 
         // make a todo div inside ul
         const todoDiv = document.createElement("div");
+        const randomDiv = document.createElement("div");
         // todo.classList.add("todo");
+        console.log(randomDiv);
         
         // create li element
         const newLi = document.createElement("li");
         let textInput = document.querySelector("input").value;
         newLi.innerText = textInput;
+        console.log(newLi);
         todoDiv.appendChild(newLi);
+        console.log(todoDiv);
 
         // check btn
         const doneButton = document.createElement("button");
-        doneButton.innerHTML = '<i class="fas fa-check"></i>';
-        // doneButton.classList.add('done-btn');
+        doneButton.innerHTML = 'Done <i class="fas fa-check"></i>';
+        doneButton.classList.add('done-btn');
         todoDiv.appendChild(doneButton);
 
         // trash btn
         const deleteBtn = document.createElement('button');
-        deleteBtn.innerHtml = '<i class="fas fa-trash"></i>';
-        // deleteBtn.classList.add('trash-btn');
+        deleteBtn.innerHTML = 'Delete <i class="fas fa-trash"></i>';
+        deleteBtn.classList.add('trash-btn');
         todoDiv.appendChild(deleteBtn);
+        
+        //edit btn
+        const editBtn = document.createElement("button");
+        editBtn.innerHTML = "Edit";
+        editBtn.classList.add("edit-btn");
+        todoDiv.appendChild(editBtn);
+        
         // append to list
         thingsUndone.appendChild(todoDiv);
+
         // clear input from user
         textInput.value = "";
     }
 
-    function deleteCheck(e) {
-        const item = e.target;
+    function btnClick(e) {
+        const item = e.target; //return button clicked
         console.log(item);
-        const todo = item.parentElement;
-        console.log(todo);
+
+        if(item.classList[0] == "trash-btn") {
+            let todo = item.parentElement;
+            console.log(todo);
+            todo.remove();
+        }
+        if(item.classList[0] == "done-btn") {
+            let todo = item.parentElement;
+            thingsDone.appendChild(todo);
+        }
+        if(item.classList[0] == "edit-btn") {
+            console.log(item);
+        }
     }
 
     
