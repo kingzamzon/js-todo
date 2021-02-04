@@ -87,7 +87,7 @@
         editBtn.innerHTML = "Edit";
         editBtn.classList.add("edit-btn");
         todoDiv.appendChild(editBtn);
-        
+
         // append to list
         thingsUndone.appendChild(todoDiv);
 
@@ -101,11 +101,17 @@
 
         if(item.classList[0] == "trash-btn") {
             let todo = item.parentElement;
+            
             console.log(todo);
             todo.remove();
         }
         if(item.classList[0] == "done-btn") {
             let todo = item.parentElement;
+            let doneBtn = todo.querySelectorAll("button");
+            todo.removeChild(doneBtn);
+            let deleteBtn = todo.querySelector("button");
+            todo.removeChild(deleteBtn);
+            // console.log(bttn);
             thingsDone.appendChild(todo);
         }
         if(item.classList[0] == "edit-btn") {
